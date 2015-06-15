@@ -1,0 +1,10 @@
+web:
+  build: .
+  env_file: .env
+  environment:
+    - COMPOSER_HOME=/.composer
+  expose:
+    - "80"
+cron:
+  image: efrecon/go-cron
+  command: go-cron '* * * * * *' /bin/sh -c 'echo hello'
