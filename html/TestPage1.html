@@ -15,46 +15,25 @@
 
   </head>
 <script>
-function addMinutes(date, minutes) {
-    return new Date(date.getTime() + minutes*60000);
-}
-
 function test_1() {
- var aname = $("#aname").val();
- var bname = $("#bname").val();
- var aphone = $("#aphone").val();
- var bphone = $("#bphone").val();
- alert("About to send a lesson to "+aphone+" and "+ bphone);
+ postdata = {
+   'aname': $("#aname").val(),
+   'bname': $("#bname").val(),
+   'aphone': $("#aphone").val(),
+   'bphone': $("#bphone").val(),
+   'aemail': $("#aemail").val(),
+   'bemail': $("#bemail").val()
+  }
 
  $.ajax({url: "call.php", 
-   data: {phonea: aphone, phoneb: bphone},
-   success: function(result){
-        $("#div1").html(result.responseText);
-  },
+   data: postdata, 
+   success: function(result) {
+        $("#result").html(result);
+   },
    error: function(result){
-        $("#div2").html(result.responseText);
-  }
-  });
-}
-
-function test_2() {
- var aname = $("#aname").val();
- var bname = $("#bname").val();
- var aphone = $("#aphone").val();
- var bphone = $("#bphone").val();
- var tnow = new Date(Date.now());
- var tfuture = addMinutes(tnow,2);
-
- $.ajax({url: "call.php", 
-   data: {phonea: aphone, phoneb: bphone,date: tfuture},
-   success: function(result){
-        $("#div1").html(result.responseText);
-    },
-   error: function(result){
-        $("#div2").html(result.responseText);
-  }
+        $("#result").html('Error: ' + result);
+   }
  });
- alert("About to schedule a lesson to "+aphone+" and "+ bphone + " at time "+tfuture);
 }
 </script>
   <body>
@@ -63,17 +42,23 @@ function test_2() {
 <p>
 Student A Name: <input id="aname" type="text" name="aname"><br>
 Student A Phone: <input id="aphone"  type="text" name="aphone"><br>
+Student A E-mail: <input id="aemail"  type="text" name="aemail"><br>
 
 <p>
 Student B Name: <input id="bname" type="text" name="bname"><br>
 Student B Phone: <input id="bphone" type="text" name="bphone"><br>
+Student B E-mail: <input id="bemail" type="text" name="bemail"><br>
+<p>
+When to connect: <select>
+  <option value="now">now</option>
+  <option value="8am">8am</option>
+  <option value="9am">9am</option>
+  <option value="10am">10am</option>
+</select><br>
 
     <button onclick="test_1()">Test now!</button>
 
-    <button onclick="test_2()">Test in 2 minutes!</button>
-
-    <div id="div1"> Test Success Here </div>
-    <div id="div2"> Test Errors Here </div>
+    <div id="result"></div>
   </body>
 </html>
 
