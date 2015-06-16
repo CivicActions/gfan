@@ -1,10 +1,7 @@
 <?php
 
-// Download the library and copy into the folder containing this file.
+require('../env.php');
 require('../vendor/twilio/sdk/Services/Twilio.php');
-
-$account_sid = $_ENV['TWILIO_SID'];
-$auth_token = $_ENV['TWILIO_TOKEN']; 
 
 $client = new Services_Twilio($account_sid, $auth_token);
 $call = $client->account->calls->create(
