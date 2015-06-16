@@ -15,12 +15,26 @@
 
   </head>
 <script>
+function addMinutes(date, minutes) {
+    return new Date(date.getTime() + minutes*60000);
+}
+
 function test_1() {
  var aname = $("#aname").val();
  var bname = $("#bname").val();
  var aphone = $("#aphone").val();
  var bphone = $("#bphone").val();
  alert("About to send a lesson to "+aphone+" and "+ bphone);
+}
+function test_2() {
+ var aname = $("#aname").val();
+ var bname = $("#bname").val();
+ var aphone = $("#aphone").val();
+ var bphone = $("#bphone").val();
+ var tnow = new Date(Date.now());
+ var tfuture = addMinutes(tnow,2);
+
+ alert("About to schedule a lesson to "+aphone+" and "+ bphone + " at time "+tfuture);
 }
 </script>
   <body>
@@ -35,6 +49,8 @@ Student B Name: <input id="bname" type="text" name="bname"><br>
 Student B Phone: <input id="bphone" type="text" name="bphone"><br>
 
     <button onclick="test_1()">Test now!</button>
+
+    <button onclick="test_2()">Test in 2 minutes!</button>
   </body>
 </html>
 
