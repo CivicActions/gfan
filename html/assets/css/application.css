@@ -171,22 +171,27 @@ a:hover.open {
  * Header
  */
 #header {
-    background: url("../img/workless.jpg") no-repeat center center fixed;
+    background: url("../img/phone.jpg") no-repeat center center fixed;
     background-size: cover;
     min-width: 100%;
     min-height: 100vh;
     margin: 0;
     padding: 0;
-    padding-top: 20%;
+    padding-top: 10%;
     float: left;
 }
 
 #header h1 {
-    color: #ffffff;
+  color: #ffffff;
+  font-size:330%;
+  text-shadow: 1px 1px #333;
 }
 
 #header h2 {
-    color: rgba( 255, 255, 255, 0.8 );
+  color: rgba( 255, 255, 255, 1);
+  font-weight:bold;
+  font-size:200%;
+  text-shadow: 1px 1px #333;
 }
 
 #header a.button {
