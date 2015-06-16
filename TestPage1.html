@@ -25,7 +25,18 @@ function test_1() {
  var aphone = $("#aphone").val();
  var bphone = $("#bphone").val();
  alert("About to send a lesson to "+aphone+" and "+ bphone);
+
+ $.ajax({url: "call.php", 
+   data: {phonea: aphone, phoneb: bphone},
+   success: function(result){
+        $("#div1").html(result.responseText);
+  },
+   error: function(result){
+        $("#div2").html(result.responseText);
+  }
+  });
 }
+
 function test_2() {
  var aname = $("#aname").val();
  var bname = $("#bname").val();
@@ -34,6 +45,15 @@ function test_2() {
  var tnow = new Date(Date.now());
  var tfuture = addMinutes(tnow,2);
 
+ $.ajax({url: "call.php", 
+   data: {phonea: aphone, phoneb: bphone,date: tfuture},
+   success: function(result){
+        $("#div1").html(result.responseText);
+    },
+   error: function(result){
+        $("#div2").html(result.responseText);
+  }
+ });
  alert("About to schedule a lesson to "+aphone+" and "+ bphone + " at time "+tfuture);
 }
 </script>
@@ -51,6 +71,9 @@ Student B Phone: <input id="bphone" type="text" name="bphone"><br>
     <button onclick="test_1()">Test now!</button>
 
     <button onclick="test_2()">Test in 2 minutes!</button>
+
+    <div id="div1"> Test Success Here </div>
+    <div id="div2"> Test Errors Here </div>
   </body>
 </html>
 
