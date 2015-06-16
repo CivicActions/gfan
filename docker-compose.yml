@@ -1,6 +1,5 @@
 web:
   build: .
-  env_file: .env
   environment:
     - COMPOSER_HOME=/.composer
   expose:
