@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+    <title>GFAN Test Page </title>
+
+  </head>
+<script>
+function test_1() {
+ var aname = $("#aname").val();
+ var bname = $("#bname").val();
+ var aphone = $("#aphone").val();
+ var bphone = $("#bphone").val();
+ alert("About to send a lesson to "+aphone+" and "+ bphone);
+}
+</script>
+  <body>
+    <h1> GFAN Test Page #1</h1>
+
+<p>
+Student A Name: <input id="aname" type="text" name="aname"><br>
+Student A Phone: <input id="aphone"  type="text" name="aphone"><br>
+
+<p>
+Student B Name: <input id="bname" type="text" name="bname"><br>
+Student B Phone: <input id="bphone" type="text" name="bphone"><br>
+
+    <button onclick="test_1()">Test now!</button>
+  </body>
+</html>
+
