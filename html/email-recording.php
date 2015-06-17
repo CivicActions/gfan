@@ -1,5 +1,5 @@
 <?php
-
-mail($_GET['aemail'], 'Your recording is ready', $_POST['RecordingUrl']);
-mail($_GET['bemail'], 'Your recording is ready', $_POST['RecordingUrl']);
+$mails = array($_GET['aname'] . '<' . $_GET['aemail'] . '>', $_GET['bname'] . '<' . $_GET['bemail'] . '>');
+$names = array($_GET['aname'], $_GET['bname']);
+mail(implode(', ', $mails), implode(' and ', $names) . ' your lesson review recording is ready!', 'Download it from: ' . $_POST['RecordingUrl']);
 

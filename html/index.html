@@ -27,68 +27,26 @@
     <script>window.jQuery || document.write('<script src="assets/js/jquery.js"><\/script>')</script>
 
       <script>
-	(function ($) {
-	$(document).ready(function(){
-	function test_1() {
-	var aname = $("#aname").val();
-	var bname = $("#bname").val();
-	var aphone = $("#aphone").val();
-	var bphone = $("#bphone").val();
-	alert("About to send a lesson to "+aphone+" and "+ bphone);
+function test_1() {
+ postdata = {
+   'aname': $("#aname").val(),
+   'bname': $("#bname").val(),
+   'aphone': $("#aphone").val(),
+   'bphone': $("#bphone").val(),
+   'aemail': $("#aemail").val(),
+   'bemail': $("#bemail").val()
+  }
 
-	$.ajax({url: "call.php", 
-	data: {phonea: aphone, phoneb: bphone},
-	success: function(result){
-	$("#div1").html(result.responseText);
-	},
-	error: function(result){
-	$("#div2").html(result.responseText);
-	}
-	});
-	}
-
-	function test_2() {
-	var aname = $("#aname").val();
-	var bname = $("#bname").val();
-	var aphone = $("#aphone").val();
-	var bphone = $("#bphone").val();
-	var tnow = new Date(Date.now());
-	var tfuture = addMinutes(tnow,2);
-
-	$.ajax({url: "call.php", 
-	data: {phonea: aphone, phoneb: bphone,date: tfuture},
-	success: function(result){
-	$("#div1").html(result.responseText);
-	},
-	error: function(result){
-	$("#div2").html(result.responseText);
-	}
-	});
-	alert("About to schedule a lesson to "+aphone+" and "+ bphone + " at time "+tfuture);
-	}
-
-	function test_3() {
-	var myname = $("#myname").val();
-	var fname = $("#fname").val();
-	var myphone = $("#myphone").val();
-	var fphone = $("#fphone").val();
-	var timeofday = $("#timeofday").val();
-	var period = $("#period").val();
-	var date = $("#date").val();
-
-	$.ajax({url: "call.php", 
-	data: {phonemy: myphone, phonef: fphone, namemy: myname, namef: fname, time:timeofday, perioda: period, datea: date},
-	success: function(result){
-	$("#div3").html("Thanks");
-	},
-	error: function(result){
-	$("#div4").html("Oops");
-	}
-	});
-	alert("Thanks!");
-	}
-	})
-	})(jQuery);
+ $.ajax({url: "call.php", 
+   data: postdata, 
+   success: function(result) {
+        $("#result").html(result);
+   },
+   error: function(result){
+        $("#result").html('Error: ' + result);
+   }
+ });
+}
       </script>
       
   </head>
@@ -122,12 +80,12 @@
 	  <!-- logo -->
 	  <div id="logo">
 	    <a href="#">
-	      <h1 class="textleft animated fadeIn">GFAN</h1>
+	      <h1 class="textleft animated fadeIn">Group forming audio network</h1>
 	    </a>
 	  </div>
 	  <!-- /logo -->
 
-	  <h2 class="textleft animated fadeIn">An open source Framework for delivering audio courses.</h2>
+	  <h2 class="textleft animated fadeIn">An open source framework for delivering audio courses.</h2>
 
 	</div>
       </header>
@@ -166,22 +124,33 @@
 	  <p>Scheduling multiple course takers for simultaneous usage, allowing for different test time options.
 	    <br />
 	    <div class="one-half ">
-
-	      Student A Name: <input id="aname" type="text" name="aname"><br />
-	      Student A Phone: <input id="aphone"  type="text" name="aphone"><br /><br />
-	      
-	      <input type="submit" class="button red" onclick="test_1()" value="Test now!">
-	      <div id="div1"></div>
+        Student A Name: <input required="true" id="aname" type="text" name="aname"><br>
+        Student A Phone: <input required="true" id="aphone"  type="text" name="aphone"><br>
+        Student A E-mail: <input required="true" id="aemail"  type="text" name="aemail"><br>
+        When to connect: <select>
+          <option value="now">now</option>
+          <option value="8am">8am daily</option>
+          <option value="9am">9am daily</option>
+          <option value="10am">10am daily</option>
+          <option value="11am">11am daily</option>
+          <option value="noon">noon daily</option>
+          <option value="1pm">1pm daily</option>
+          <option value="2pm">2pm daily</option>
+          <option value="3pm">3pm daily</option>
+          <option value="4pm">4pm daily</option>
+          <option value="5pm">5pm daily</option>
+          <option value="6pm">6pm daily</option>
+        </select><br>
 	    </div>
 
 	    <div class="one-half ">
-
-	      Student B Name: <input id="bname" type="text" name="bname"><br />
-	      Student B Phone: <input id="bphone" type="text" name="bphone"><br />
+        Student B Name: <input required="true" id="bname" type="text" name="bname"><br>
+        Student B Phone: <input required="true" id="bphone" type="text" name="bphone"><br>
+        Student B E-mail: <input required="true" id="bemail" type="text" name="bemail"><br>
 	      <br />
-	      <input type="submit" class="button green" onclick="test_2()" value="Test in 2 minutes!">
+	      <input type="submit" class="button red" onclick="test_1()" value="Go!">
 	      
-	      <div id="div2"></div>
+	      <div id="result"></div>
 	    </div>
 
 	</div>
@@ -189,45 +158,12 @@
 
       <hr>
 
-      <!-- self-scheduling -->
-      <section id="demo-self-scheduling" class="section">
-
-	<div class="boxed">
-	  <h6>User scheduling a course</h6>
-	  <p>Scheduling multiple course takers for simultaneous usage, allowing for different test time options.
-	    <br />
-	    <div class="two-third">
-
-	      My Name: <input id="myname" type="text" name="myname"><br />
-	      My Phone: <input id="myphone"  type="text" name="myphone"><br />
-	      Time of Day: <input id="timeofday"  type="text" name="timeofday"><br />
-	      Period of Lessons: <input id="period"  type="text" name="period"><br />
-	      Start Date: <input id="date"  type="text" name="date"><br />
-	      <br /><br />
-	    </div>
-
-	    <div class="one-third">
-
-	      Friends Name: <input id="fname" type="text" name="fname"><br />
-	      Friends Phone: <input id="fphone" type="text" name="fphone"><br />
-	      <br />
-	      <input type="submit" class="button yellow" onclick="test_3()" value="Add A Friend">
-	      
-	      <div id="div3"></div>
-	      <div id="div4"></div>
-	    </div>
-
-	</div>
-      </section>
-
-      <hr>      
-
       <section id="other-features" class="section">
 	<div class="boxed">
 
 	  <div class="two-third">
 	    <h6>Other Features</h6>
-	    <p>Users and instructors have mulitple options.</p>
+	    <p>Users and instructors have multiple options.</p>
 	    <ul>
 	      <li>Designated repeatable course call times.</li>
 	      <li>Course taker user interaction during session.</li>
