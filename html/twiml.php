@@ -5,7 +5,7 @@ require('../env.php');
 require('../vendor/twilio/sdk/Services/Twilio.php');
 
 $response = new Services_Twilio_Twiml;
-$response->say('Hello ' . implode(' and ', array($_GET['aname'], $_GET['bname']));
+$response->say('Hello ' . implode(' and ', array($_GET['aname'], $_GET['bname'])));
 $response->say('Starting lesson');
 $response->play('http://gfan.civicactions.net/FreeMindfulness3MinuteBreathing.mp3');
 $response->say('Share your learnings');
